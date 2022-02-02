@@ -51,7 +51,11 @@ jobs:
           name: func
           path: FunctionApp1
           
-#TODO: LOGIN TO AZURE
+      - name: Log in with Azure
+        uses: azure/login@v1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          enable-AzPSSession: true
 
       - name: Deploy Function to Personal Subscription
         uses: Azure/functions-action@v1
