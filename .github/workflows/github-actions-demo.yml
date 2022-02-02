@@ -27,13 +27,13 @@ jobs:
 
       - name: Publish Func
         # TODO: is this the right output?
-        run: dotnet publish FunctionApp1.csproj -c Release -o './FunctionApp1'
+        run: dotnet publish FunctionApp1.csproj -c Release -o './func-output'
         working-directory: FunctionApp1
 
       - uses: actions/upload-artifact@v2
         with:
           name: func
-          path: "./FunctionApp1"
+          path: "./FunctionApp1/func-output"
         
       - run: echo "🍏 This Build Job status is ${{ job.status }}."
         
