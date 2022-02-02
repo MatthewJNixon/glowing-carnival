@@ -1,6 +1,6 @@
 name: GitHub Actions Function Deploy
 
-on: [push]
+on: [ push ]
 #on:
 #  push:
 #    branches: [master]
@@ -20,13 +20,12 @@ jobs:
       - name: Restore nuget dependencies
         run: dotnet restore
         working-directory: FunctionApp1
-        
+
       - name: Build Func
         run: dotnet build --no-restore
-        working-directory: FunctionApp1   
+        working-directory: FunctionApp1
 
       - name: Publish Func
-        # TODO: is this the right output?
         run: dotnet publish FunctionApp1.csproj -c Release -o './func-output'
         working-directory: FunctionApp1
 
@@ -34,11 +33,9 @@ jobs:
         with:
           name: func
           path: "./FunctionApp1/func-output"
-        
+
       - run: echo "🍏 This Build Job status is ${{ job.status }}."
         
-    # TODO save the artifact somewhere?
-
   Deploy-Function:
     runs-on: ubuntu-latest
     needs: Build-Function
@@ -50,7 +47,7 @@ jobs:
         with:
           name: func
           path: FunctionApp1
-          
+
       - name: Log in with Azure
         uses: azure/login@v1
         with:
@@ -63,20 +60,4 @@ jobs:
           app-name: "${{ env.AZURE_FUNCTIONAPP_NAME }}"
           package: "./FunctionApp1"
 
-      - run: echo "🍏 This Deploy Job status is ${{ job.status }}."          
-        
-                # jobs:
-#   Explore-GitHub-Actions:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-#       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-#       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-#       - name: Check out repository code
-#         uses: actions/checkout@v2
-#       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-#       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-#       - name: List files in the repository
-#         run: |
-#           ls ${{ github.workspace }}
-#       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: echo "🍏 This Deploy Job status is ${{ job.status }}." 
