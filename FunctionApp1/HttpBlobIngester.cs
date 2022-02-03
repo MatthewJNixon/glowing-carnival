@@ -24,7 +24,8 @@ public class HttpBlobIngester
 
     // TODO: Do we want this inline?
     // TODO: also doesn't allow people to upload through Swagger FWIW
-    [OpenApiOperation(operationId: "run", tags: new[] {"multipartformdata"}, Summary = "Transfer image through multipart/formdata", Description = "This transfers an image through multipart/formdata.",
+    [FunctionName("HttpBlobIngester")]
+    [OpenApiOperation(operationId: "run", tags: new[] {"HttpBlobIngester"}, Summary = "Transfer document through multipart/formdata", Description = "This transfers document through multipart/formdata.",
         Visibility = OpenApiVisibilityType.Advanced)]
     [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
     [OpenApiRequestBody(contentType: "multipart/form-data", bodyType: typeof(MultiPartFormDataModel), Required = true, Description = "Image data")]
