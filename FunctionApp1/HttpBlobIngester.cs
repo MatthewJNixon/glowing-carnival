@@ -29,7 +29,7 @@ public class HttpBlobIngester
         Visibility = OpenApiVisibilityType.Advanced)]
     [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
     [OpenApiRequestBody(contentType: "multipart/form-data", bodyType: typeof(MultiPartFormDataModel), Required = true, Description = "Image data")]
-    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "image/png", bodyType: typeof(byte[]), Summary = "Image data", Description = "This returns the image", Deprecated = false)]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/html", bodyType: typeof(byte[]), Summary = "Document Details", Description = "This returns the details of the document", Deprecated = false)]
     public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Function, "post", Route = "uploadFile")] HttpRequest req)
     {
         try
