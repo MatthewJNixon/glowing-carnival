@@ -1,6 +1,4 @@
-using System.IO;
 using System.Net;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -13,7 +11,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using static System.String;
 
-namespace FunctionApp1;
+namespace FunctionApp1.Functions;
 
 public class Function1
 {
@@ -26,7 +24,7 @@ public class Function1
         _configuration = configuration;
     }
 
-    [FunctionName("MattsTestFunction")]
+    [FunctionName("MattsTestHttpTrigger")]
     [OpenApiOperation(operationId: "Run", tags: new[] {"name"})]
     [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
     [OpenApiParameter(name: "name", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Name** parameter")]
