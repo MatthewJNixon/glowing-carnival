@@ -26,6 +26,8 @@ public class BlobTriggerIngester
             csv.Context.RegisterClassMap<FooMap>();
             var records = csv.GetRecords<Foo>();
 
+
+
             foreach (var record in records)
             {
                 log.LogInformation($"Record: {record.Id} with name {record.Name}");
@@ -48,7 +50,7 @@ public class BlobTriggerIngester
 
     public async void UpdateData(ILogger log) =>
         await _dataverseWebApiService.PostCreateAsync("cr70e_testtables", new TestTableEntity {
-            EpisodeId = "4",
+            EpisodeId = "5",
             EpisodeName = "test name"
         });
 
