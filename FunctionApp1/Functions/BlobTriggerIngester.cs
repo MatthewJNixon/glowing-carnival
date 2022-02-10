@@ -18,7 +18,8 @@ public class BlobTriggerIngester
     }
 
     [FunctionName("CsvBlobTrigger")]
-    public Task RunAsync([BlobTrigger("samples-workitems/{name}", Connection = "")] Stream myBlob, string name, ILogger log)
+    public Task RunAsync([BlobTrigger("samples-workitems/{name}", Connection = "")] Stream myBlob, string name,
+        ILogger log)
     {
         using (var reader = new StreamReader(myBlob))
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
@@ -26,14 +27,11 @@ public class BlobTriggerIngester
             csv.Context.RegisterClassMap<FooMap>();
             var records = csv.GetRecords<Foo>();
 
-
-
             foreach (var record in records)
             {
                 log.LogInformation($"Record: {record.Id} with name {record.Name}");
             }
         }
-
         // UpdateData(log);
 
         // FetchData(log);
